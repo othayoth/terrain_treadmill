@@ -1,0 +1,80 @@
+<launch>
+	<arg name="camera" default="true" />
+	<arg name="aruco" default="true" />
+	<arg name="kalman" default="true" />
+	<arg name="FK" default="true" />
+	<arg name="controller" default="true" />
+	<arg name="hardware_connected" default="true" />
+	<arg name="inverse_kinematics" default="false" />
+	<arg name="visualization" default="true" />
+	<arg name="light_visualization" default="false" />
+	<arg name="record" default="false" />
+	<arg name="Rviz" default="false" />
+
+
+	<!-- Start Camera Node -->
+	<group if="$(arg camera)" >
+		<include file="$(find terrain_treadmill)/launch/flea3.launch" />
+	</group>
+
+	<!-- Start Aruco Tag Detection Node -->
+	<group if="$(arg aruco)" >
+		<include file="$(find terrain_treadmill)/launch/aruco_marker_finder.launch" />
+	</group>
+	
+	<!-- Start Kalman Filter Node -->
+	<group if="$(arg kalman)" >
+		<node pkg="terrain_treadmill" type="kalman_filter_node.py" name="kalman_filter_node" output="screen" />
+	</group>
+
+	<!-- Start Controller Node -->
+	<group if="$(arg controller)" >
+		<node pkg="terrain_treadmill" type="controller_node.py" name="controller_node" />
+	</group>
+
+	<!-- Start Forward Kinematics Node -->
+	<group if="$(arg FK)" >
+  		<node pkg="terrain_treadmill" type="forward_kinematics_node.py" name="forward_kinematics_node" output="screen" />
+  	</group>
+
+  	<!-- Start Serial Node -->
+	<group if="$(arg hardware_connected)" >
+		<include file="$(find terrain_treadmill)/launch/serial.launch" />
+  	</group>
+
+  	<!-- Start Inverse Kinematics Node -->
+  	<group if="$(arg inverse_kinematics)" >
+  		<node pkg="terrain_treadmill" type="inverse_kinematics_node.py" name="inverse_kinematics_node" />
+  	</group>
+
+  	<!-- Start Complete Visualtization -->
+  	<group if="$(arg visualization)" >
+  		<node pkg="rqt_gui" type="rqt_gui" name="Visualtization"
+  			  args="--perspective-file $(find terrain_treadmill)/config/visualization.perspective" />
+  		<node pkg="rqt_gui" type="rqt_gui" name="Graphs" 
+  			  args="--perspective-file $(find terrain_treadmill)/config/Graphs.perspective" />
+  	</group>
+
+  	<!-- Start Tracking Visualization -->
+  	<group if="$(arg light_visualization)" >
+  		<node pkg="image_view" type="image_view" name="tracking_results" >
+  			<remap from="/image" to="aruco_single/result" />
+  		</node>
+  	</group>
+
+  	<!-- Record Data using Rosbag -->
+  	<group if="$(arg record)" >
+  		<node pkg="rosbag" type="record" name="rosbag_record" output="screen"
+  			  args="-o terrain_treadmill /pg_12481138/image_raw/compressed /kalman_state /arduino/actual_velocity_counts
+  			  /aruco_single/result/compressed /aruco_single/debug/compressed" />
+  	</group>
+
+
+  	<!-- Rviz nodes -->
+  	<group if="$(arg Rviz)">
+  		<node pkg="terrain_treadmill" type="tag_marker.py" name="tag_marker" />
+  		<node pkg="terrain_treadmill" type="filter_marker.py" name="filter_marker" />
+  		<node pkg="rviz" type="rviz" name="rviz" args="-d $(find terrain_treadmill)/config/rviz_config.rviz" />
+  	</group>
+
+</launch>
