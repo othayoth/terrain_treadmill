@@ -6,7 +6,7 @@
 
 * [Overview and Setup](#terrain-treadmill)
 * [Nodes](../src#nodes)
-* [Launch Files](./launch#launch-files)
+* [Launch Files](../launch#launch-files)
 * [Arduino Code](#arduino-code)
 	* [Main](#main)
 	* [Libraries](#libraries)
@@ -25,7 +25,7 @@
 ## Libraries
 
 ### ROS Interface Library
-[ros_lib](./Libraries/ros_lib) contains the files required to use [rosserial](http://wiki.ros.org/rosserial) to communicate with the Arduino. If you're having trouble getting the sketch to compile after following the instructions in [Hardware setup](), try reinstalling ros_lib in your Arduino sketchbook by sourcing your workspace and then [Instal ros_lib into the Arduino Environment](http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup). NOTE, when using this library with an Arduino Due, manually change `Serial1` to `Serial` in [ArduinoHardware.h](./Libraries/ros_lib/ArduinoHardware.h#L68) or the Arduino will not connect with ROS.
+[ros_lib](./Libraries/ros_lib) contains the files required to use [rosserial](http://wiki.ros.org/rosserial) to communicate with the Arduino. If you're having trouble getting the sketch to compile after following the instructions in [Hardware setup](), try reinstalling ros_lib in your Arduino sketchbook by sourcing your workspace and then [Install ros_lib into the Arduino Environment](http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup). NOTE, when using this library with an Arduino Due, manually change `Serial1` to `Serial` in [ArduinoHardware.h](./Libraries/ros_lib/ArduinoHardware.h#L68) or the Arduino will not connect with ROS.
 
 ### Motor Control Library
 [pid_lib](./Libraries/pid_lib) is a custom C library for velocity control of 3 DC motors with encoders using PID control. The library files are organized as follows. For more information on an individual file, check the comments. This library can easily be adapted to use more/less motors or different hardware.
