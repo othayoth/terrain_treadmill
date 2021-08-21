@@ -46,7 +46,7 @@ An [Arduino Due](https://store.arduino.cc/usa/arduino-due) is used to interface 
 * Note: if you have trouble compiling the Arduino Code, see the Arduino [readme](./Arduino).
 
 ## Running the Device
-To start the device, navigate to your workspace, source the correct environment variables, and launch [start.launch](https://github.com/BlakeStrebel/terrain_treadmill/blob/master/launch/start.launch)
+To start the device, navigate to your workspace, source the correct environment variables, and launch [start.launch](./launch/start.launch)
 * `cd [catkin_ws]`
 * `source devel/setup.bash`
 * `roslaunch terrain_treadmill start.launch`
@@ -69,7 +69,7 @@ For more options, see [launch](./launch).
 
 Several aspects of the device must be tuned in order to achieve optimum performance. These include:
 * Low-Level Motor Controllers:
-The Arduino uses three [PID Controllers](https://en.wikipedia.org/wiki/PID_controller) to match the desired velocity sent to the Arduino from the computer. These controllers are tuned to track the desired velocity as closely as possible while maintaining desired response characteristics (low overshoot, quick settling time, etc.). The [motor_test_node.py](https://github.com/BlakeStrebel/terrain_treadmill/blob/master/src/motor_test_node.py) node can be used to aid in the tuning of these controllers. See the [node readme](./src) for more information.
+The Arduino uses three [PID Controllers](https://en.wikipedia.org/wiki/PID_controller) to match the desired velocity sent to the Arduino from the computer. These controllers are tuned to track the desired velocity as closely as possible while maintaining desired response characteristics (low overshoot, quick settling time, etc.). The [motor_test_node.py](./src/motor_test_node.py) node can be used to aid in the tuning of these controllers. See the [node readme](./src) for more information.
 
 * Kalman Filter Gains:
 A constant velocity model [kalman filter](https://en.wikipedia.org/wiki/Kalman_filter) is used to estimate the animal position when the tracking data becomes temporarily unavailable. Several aspects of the filter must be tuned for optimal performance. For this project, the most relevant parameter is the process covariance which can be tuned using dynamic reconfigure. For more information on the kalman filter, see the [node readme](./src).
@@ -78,7 +78,7 @@ A constant velocity model [kalman filter](https://en.wikipedia.org/wiki/Kalman_f
 A PID position controller is used to determine the desired control effort as a result of the animal's deviation from the center of the image frame. The PID gains from this controller can be tuned using dynamic reconfigure. For more information on this controller, see the [node readme](./src).
 
 * Camera parameters:
-Various camera parameters must be tuned in order to obtain good images for tracking. Camera placement, focus, lens size, and aperture are all hardware adjustments for this setup. Additionally, there are several parameters which can be adjusted in [flea3.launch](https://github.com/BlakeStrebel/terrain_treadmill/blob/master/launch/flea3.launch). These parameters can be tuned using dynamic reconfigure and then saved using the launch file.
+Various camera parameters must be tuned in order to obtain good images for tracking. Camera placement, focus, lens size, and aperture are all hardware adjustments for this setup. Additionally, there are several parameters which can be adjusted in [flea3.launch](./launch/flea3.launch). These parameters can be tuned using dynamic reconfigure and then saved using the launch file.
 
   * Frame-rate: dictates how quickly the camera captures images. Note, higher frame rates do not necessarily result in better performance if Aruco tag detection cannot analyze images quickly enough. It is recommended to match the frame-rate to the frequency of Aruco tag detection at a given resolution.
 
@@ -91,7 +91,7 @@ Various camera parameters must be tuned in order to obtain good images for track
   * Before use, the camera will also need to be calibrated to account for distortion. For information on how to calibrate the camera, see the [launch readme](./launch).
 
 * Aruco Tracking Parameters:
-[Aruco](https://www.uco.es/investiga/grupos/ava/node/26) is a tracking library which uses VR tags to determine tag locations in real-world coordinates. [Pal Robotics ROS implementation](https://github.com/pal-robotics/aruco_ros) of the library is used for this project. Assuming the camera parameters are set properly, there are several Aruco parameters which also must be adjusted for optimal performance. First, the markerID and size must be properly set in [aruco_marker_finder.launch](https://github.com/BlakeStrebel/terrain_treadmill/blob/master/launch/aruco_marker_finder.launch). The threshold parameters can then be adjusted using dynamic reconfigure. To permanently save adjustments, change the default values within your aruco_ros ArucoThreshold.cfg file. Note: this file is not located in the terrain_treadmill package.
+[Aruco](https://www.uco.es/investiga/grupos/ava/node/26) is a tracking library which uses VR tags to determine tag locations in real-world coordinates. [Pal Robotics ROS implementation](https://github.com/pal-robotics/aruco_ros) of the library is used for this project. Assuming the camera parameters are set properly, there are several Aruco parameters which also must be adjusted for optimal performance. First, the markerID and size must be properly set in [aruco_marker_finder.launch](./launch/aruco_marker_finder.launch). The threshold parameters can then be adjusted using dynamic reconfigure. To permanently save adjustments, change the default values within your aruco_ros ArucoThreshold.cfg file. Note: this file is not located in the terrain_treadmill package.
 
 ## Data Analysis
 Data can be recorded in a [rosbag](http://wiki.ros.org/rosbag) by running `roslaunch terrain_treadmill start.launch record:=true.` This results in a rosbag file containing being stored in your `~/.ros` directory. This bag can be played back for analysis. For more information on using rosbag to play back data, see [here](http://wiki.ros.org/rosbag/Commandline#play). Videos recorded in rosbag files can also be exported in your desired format. For information on exporting rosbag videos, see [here](http://wiki.ros.org/rosbag/Tutorials/Exporting%20image%20and%20video%20data). Rosbag files can also be imported directly to MATLAB using the [Robotics Systems Toolbox](https://www.mathworks.com/help/robotics/index.html). This package contains custom messages which will need to be imported to MATLAB using the [rosgenmsg](https://www.mathworks.com/help/robotics/ref/rosgenmsg.html) function which requires the [Robotics System Toolbox Interface for ROS Custom Messages](https://www.mathworks.com/matlabcentral/fileexchange/49810-robotics-system-toolbox-interface-for-ros-custom-messages).

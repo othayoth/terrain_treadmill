@@ -1,6 +1,6 @@
 # Arduino Code
 
-![circuit diagram](/images/Circuit.jpg "circuit diagram")
+![circuit diagram](../images/Circuit.jpg "circuit diagram")
 
 ### Table of Contents
 
