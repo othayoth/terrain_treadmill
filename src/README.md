@@ -14,7 +14,6 @@
 	* [controller_node](#controller_node)
 	* [forward_kinematics_node](#forward_kinematics_node)
 	* [serial_node](#serial_node)
-	* [inverse_kinematics_node](#inverse_kinematics_node)
 	* [motor_test_node](#motor_test_node)
 * [Launch Files](../launch#launch-files)
 * [Arduino Code](../Arduino#arduino-code)
