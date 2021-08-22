@@ -33,7 +33,7 @@ This node performs Aruco tag tracking. It is started by [aruco_marker_finder.lau
 
 ![result](../images/result.png "/aruco_single/result")
 
-* `/aruco_single/debug` contains binary image displaying result of image thresholding performed Aruco node. This image is used to tune the Aruco parameters discussed [here](https://github.com/BlakeStrebel/terrain_treadmill#device-tuning).
+* `/aruco_single/debug` contains binary image displaying result of image thresholding performed Aruco node. This image is used to tune the Aruco parameters discussed [here](https://github.com/TerradynamicsLab/terrain_treadmill#device-tuning).
 
 ![debug](../images/debug.png  "/aruco_single/debug")
 
