@@ -3,7 +3,7 @@
 ![node graph](../images/Node_Graph.png "simplified node graph")
 
 ### Table of Contents
-* [Overview and Setup](https://github.com/BlakeStrebel/terrain_treadmill#terrain-treadmill)
+* [Overview and Setup](https://github.com/TerradynamicsLab/terrain_treadmill#terrain-treadmill)
 * [Nodes](#nodes)
 	* [/pg_12481138](#pg_12481138)
 	* [aruco_single](#aruco_single)
