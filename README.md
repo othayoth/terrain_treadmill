@@ -1,5 +1,6 @@
-# Terrain Treadmill
-This repository contains code being used to run the complex terrain treadmill in the [Terradynamics Lab](https://li.me.jhu.edu/) at Johns Hopkins University.
+# Terrain Treadmill [![DOI](https://zenodo.org/badge/doi/10.1101/2021.08.31.458392.svg)](https://doi.org/10.1101/2021.08.31.458392)
+This repository contains code being used to run the complex terrain treadmill in the [Terradynamics Lab](https://li.me.jhu.edu/) at Johns Hopkins University and accopanies publication ['A terrain treadmill to study small animal locomotion through large obstacles'](https://doi.org/10.1101/2021.08.31.458392)
+
 
 ![Apparatus](./images/Apparatus.jpg "apparatus image")
 
