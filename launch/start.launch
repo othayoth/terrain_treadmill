@@ -13,8 +13,13 @@
 
 
 	<!-- Start Camera Node -->
-	<group if="$(arg camera)" >
+	<!--group if="$(arg camera)" >
 		<include file="$(find terrain_treadmill)/launch/flea3.launch" />
+	</group-->
+
+	<!-- Start webamera Node -->
+	<group if="$(arg camera)" >
+		<include file="$(find terrain_treadmill)/launch/webcam.launch" />
 	</group>
 
 	<!-- Start Aruco Tag Detection Node -->

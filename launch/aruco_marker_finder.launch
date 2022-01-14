@@ -8,8 +8,8 @@
 	<arg name="corner_refinement" default="LINES" /> <!-- NONE, HARRIS, LINES, SUBPIX -->
 
 	<node pkg="aruco_ros" type="single" name="aruco_single" >
-		<remap from="/camera_info" to="/pg_12481138/camera_info" />
-		<remap from="/image" to="/pg_12481138/image_raw" />
+		<remap from="/camera_info" to="/cv_camera/camera_info" />
+		<remap from="/image" to="/cv_camera/image_raw" />
 		<param name="image_is_rectified" value="True"/>
 		<param name="marker_size" value="$(arg markerSize)"/>
 		<param name="marker_id" value="$(arg markerId)"/>
